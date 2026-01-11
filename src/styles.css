@@ -1,7 +1,15 @@
 @import "tailwindcss";
 
+@theme {
+  --color-marks-navy: #1f365d;
+  --color-marks-navy-light: #2c4a7c;
+  --color-marks-orange: #d44c11;
+  --color-marks-orange-light: #f06e35;
+  --color-marks-gray-bg: #f5f6f7;
+}
+
 body {
-  @apply m-0;
+  @apply m-0 bg-marks-gray-bg;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
