@@ -1,0 +1,64 @@
+================================================================
+ROLE: Senior Full-Stack Engineer / Mobile Web Specialist
+PROJECT: Retail-Sync Pro
+STACK: TanStack Start + Supabase + Playwright + html5-qrcode
+================================================================
+
+1. CORE SYSTEM ARCHITECTURE
+----------------------------------------------------------------
+- Frontend: TanStack Start (React) with mobile-first Tailwind CSS.
+- Backend: TanStack Server Functions (RPCs) for web scraping.
+- Database: Supabase (PostgreSQL) for warehouse snapshots.
+- Input: Mobile Camera (WebRTC) + Manual Search Bar fallback.
+
+2. MOBILE CAMERA & SCANNING LOGIC
+----------------------------------------------------------------
+- Component: Create a reusable `<Scanner />` using 'html5-qrcode'.
+- Constraints: 
+    - Set 'facingMode' to "environment" (rear camera).
+    - Must include 'playsInline' and 'muted' for iOS Safari support.
+- Haptics: Trigger `navigator.vibrate(200)` on a successful scan.
+- Workflow: Upon scan, navigate user to `/product/${barcode}`.
+
+3. DUAL-DATA FETCHING STRATEGY
+----------------------------------------------------------------
+When the `/product/$sku` route is loaded, the TanStack Loader must:
+1. INTERNAL: Query Supabase 'warehouse_snapshots' table for the SKU.
+2. EXTERNAL: Call a Server Function `fetchMarkData(sku)`.
+
+4. SCRAPER SPECIFICATIONS (Server-Side)
+----------------------------------------------------------------
+- URL: `https://www.marks.com/en/search.html?q=${sku}`
+- Engine: Playwright (Headless).
+- Logic:
+    - If redirected to a PDP (/pdp.html): Extract price/title from page.
+    - If remaining on Search Results: Extract from the first '.product-tile'.
+- Output: Return JSON { title, price, imageUrl, webLink }.
+
+5. DATABASE SCHEMA (Supabase)
+----------------------------------------------------------------
+- Table: `warehouse_snapshots`
+    - sku: text (Unique Index)
+    - quantity: integer
+    - bin_location: text
+    - product_name: text
+    - last_updated: timestamp
+
+6. UI REQUIREMENTS
+----------------------------------------------------------------
+- Mobile-First: Buttons must be "thumb-friendly" (min-height 44px).
+- Comparison View: Display a split-card UI. 
+    - Left side: "In-Store Warehouse Data" (from Supabase).
+    - Right side: "Live Online Data" (from Mark's Scraper).
+- Fallback: If scraping fails or item isn't in snapshots, show a 
+  helpful "Item Not Found" state with a manual search option.
+
+7. STEP-BY-STEP EXECUTION FOR AGENT
+----------------------------------------------------------------
+1. Initialize TanStack Start and install: supabase-js, playwright, html5-qrcode.
+2. Configure Supabase client and environment variables.
+3. Build the Server Function for Playwright scraping.
+4. Build the Mobile Scanner component with camera permissions handling.
+5. Create the dynamic route `/product/$sku` with the dual-loader logic.
+6. Apply a clean "Industrial/Nature" aesthetic using Tailwind (Slate/Emerald).
+================================================================
