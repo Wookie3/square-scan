@@ -97,11 +97,11 @@ export function Scanner() {
     <div className="w-full max-w-lg mx-auto p-4">
       <div
         id="reader"
-        className="overflow-hidden rounded-2xl border-4 border-emerald-500 shadow-xl bg-black aspect-square"
+        className="overflow-hidden rounded-2xl border-4 border-marks-orange shadow-xl bg-black aspect-square"
       ></div>
       <div className="mt-6 text-center">
-        <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-100 text-emerald-800 text-sm font-medium animate-pulse">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 mr-2"></span>
+        <div className="inline-flex items-center px-4 py-2 rounded-full bg-slate-100 text-marks-navy text-sm font-medium animate-pulse border border-slate-200">
+          <span className="w-2 h-2 rounded-full bg-marks-orange mr-2"></span>
           Active Scanning...
         </div>
         <p className="mt-4 text-slate-500 text-sm">

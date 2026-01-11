@@ -29,9 +29,6 @@ const config = defineConfig({
     tanstackStart(),
     viteReact(),
   ],
-  optimizeDeps: {
-    exclude: ['playwright', 'playwright-core'],
-  },
 })
 
 export default config
